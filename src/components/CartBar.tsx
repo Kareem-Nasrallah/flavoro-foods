@@ -1,14 +1,30 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import CartItems from "./CartItems";
+
+interface stateType {
+  cartReducer: {
+    cart: {
+      id: number;
+      img: string;
+      name: string;
+      price: number;
+      desc: string;
+      category: string;
+      rating: number;
+    }[];
+  };
+}
 
 const CartBar = () => {
   const [showCart, setShowCart] = useState<Boolean>(false);
-  console.log(showCart);
+  const cartItems = useSelector((state: stateType) => state.cartReducer);
   return (
     <>
       <div
         className={
-          "px-1 flex flex-col justify-between items-center text-gray-800 py-5 z-20 bg-white fixed h-screen w-full top-0 transition-all duration-500 ease-in-out lg:w-68 lg:px-5 " +
-          (showCart ? "right-0" : "-right-full lg:-right-72")
+          "px-1 flex flex-col items-center text-gray-800 py-5 z-20 bg-white fixed h-screen w-full top-0 transition-all duration-500 ease-in-out lg:w-[20vw] lg:px-5 " +
+          (showCart ? "right-0" : "-right-full lg:-right-[20vw]")
         }
       >
         <div className="w-full flex flex-col items-center pt-3">
@@ -22,7 +38,17 @@ const CartBar = () => {
             </div>
           </div>
         </div>
-          <p className="text-base font-med text-gray-600">Your cart is empty</p>
+        <div className="grow">
+          {cartItems.cart.length == 0 ? (
+            <div className="h-full flex justify-center items-center">
+              <p className="text-base font-medium text-gray-600">
+                Your cart is empty
+              </p>
+            </div>
+          ) : (
+            <CartItems />
+          )}
+        </div>
         <div className="font-semibold w-full">
           <p>
             Items :<span className="text-green-500"> 0</span>
