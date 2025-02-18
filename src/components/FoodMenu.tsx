@@ -1,17 +1,18 @@
 import { FC } from "react";
 import foodData from "../data/foodData";
 interface propsType {
-    choosed:string
+    choosed:string;
+    search:string
 }
 
-const FoodMenu:FC<propsType> = ({choosed}) => {
+const FoodMenu:FC<propsType> = ({choosed, search}) => {
     
 const typeChoosed = choosed==="All"? foodData : foodData.filter(food=>food.category===choosed)
-
+const searchFood = search==''? typeChoosed : typeChoosed.filter(food=>food.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
-    <div className="flex flex-wrap gap-10">
-      {typeChoosed.map((food) => {
+    <div className="flex flex-wrap justify-evenly gap-10">
+      {searchFood.map((food) => {
         return (
           <div key={food.id} className="flex flex-col justify-between gap-2 bg-white p-5 w-[250px] rounded-lg">
             <img src={food.img} className="h-[130px] rounded-lg transition-all duration-500 ease-in-out hover:scale-110" />
