@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../redux/cartSlice";
 
 interface stateType {
   cartReducer: {
@@ -16,6 +17,7 @@ interface stateType {
 }
 
 const CartItems = () => {
+  const dispatch = useDispatch();
   const allCartItems = useSelector(
     (state: stateType) => state.cartReducer.cart
   );
@@ -26,7 +28,7 @@ const CartItems = () => {
         return (
           <div
             key={food.id}
-            className="w-full flex justify-evenly gap-2 rounded-lg shadow-md lg:w-full"
+            className="w-full flex justify-evenly gap-2 rounded-lg shadow-md max-w-80 lg:w-full"
           >
             <img
               src={food.img}
@@ -38,13 +40,22 @@ const CartItems = () => {
             </div>
             <div className="flex flex-col items-center justify-between ms-2">
               <div>
-                <i className="text-xs cursor-pointer border p-0.5 fa-solid fa-plus border-black hover:text-green-700"></i>
+                <i
+                  className="text-xs cursor-pointer border p-0.5 fa-solid fa-plus border-black hover:text-green-700"
+                  onClick={() => dispatch(cartActions.add_item(food))}
+                ></i>
                 <span className="text-sm text-green-500 mx-2">
                   {food.quantity}
                 </span>
-                <i className="text-xs cursor-pointer border p-0.5 fa-solid fa-minus border-black hover:text-red-700"></i>
+                <i
+                  className="text-xs cursor-pointer border p-0.5 fa-solid fa-minus border-black hover:text-red-700"
+                  onClick={() => dispatch(cartActions.minus_quantity(food))}
+                ></i>
               </div>
-              <i className="fa-solid fa-trash text-sm cursor-pointer p-0.5 hover:text-red-500"></i>
+              <i
+                className="fa-solid fa-trash text-sm cursor-pointer p-0.5 hover:text-red-500"
+                onClick={() => dispatch(cartActions.rimove_item(food))}
+              ></i>
             </div>
           </div>
         );

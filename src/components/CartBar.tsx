@@ -14,13 +14,16 @@ interface stateType {
       rating: number;
       quantity: number;
     }[];
+    total: number;
+    amount: number;
   };
 }
 
 const CartBar = () => {
   const [showCart, setShowCart] = useState<Boolean>(false);
-  const cartItems = useSelector((state: stateType) => state.cartReducer.cart);
-  console.log(cartItems);
+  const cartStore = useSelector((state: stateType) => state.cartReducer);
+  const cartItems = cartStore.cart;
+
   return (
     <>
       <div
@@ -53,10 +56,11 @@ const CartBar = () => {
         </div>
         <div className="font-semibold w-full">
           <p>
-            Items :<span className="text-green-500"> 0</span>
+            Items :<span className="text-green-500"> {cartStore.amount}</span>
           </p>
           <p>
-            Total Amount :<span className="text-green-500"> 0$</span>
+            Total Amount :
+            <span className="text-green-500"> {cartStore.total}$</span>
           </p>
           <div className="pt-2 mt-2 w-full border-t border-gray-200">
             <button className="bg-green-500 text-white w-full mx-auto h-10 rounded-lg">
