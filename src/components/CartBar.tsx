@@ -12,18 +12,20 @@ interface stateType {
       desc: string;
       category: string;
       rating: number;
+      quantity: number;
     }[];
   };
 }
 
 const CartBar = () => {
   const [showCart, setShowCart] = useState<Boolean>(false);
-  const cartItems = useSelector((state: stateType) => state.cartReducer);
+  const cartItems = useSelector((state: stateType) => state.cartReducer.cart);
+  console.log(cartItems);
   return (
     <>
       <div
         className={
-          "px-1 flex flex-col items-center text-gray-800 py-5 z-20 bg-white fixed h-screen w-full top-0 transition-all duration-500 ease-in-out lg:w-[20vw] lg:px-5 " +
+          "px-1 flex flex-col items-center text-gray-800 py-5 z-20 bg-white fixed h-screen w-full top-0 transition-all duration-500 ease-in-out lg:w-[20vw] lg:min-w-80 lg:px-5 " +
           (showCart ? "right-0" : "-right-full lg:-right-[20vw]")
         }
       >
@@ -38,8 +40,8 @@ const CartBar = () => {
             </div>
           </div>
         </div>
-        <div className="grow">
-          {cartItems.cart.length == 0 ? (
+        <div className="grow w-full">
+          {cartItems.length == 0 ? (
             <div className="h-full flex justify-center items-center">
               <p className="text-base font-medium text-gray-600">
                 Your cart is empty

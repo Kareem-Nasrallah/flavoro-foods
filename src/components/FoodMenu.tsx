@@ -1,6 +1,9 @@
 import { FC } from "react";
 import foodData from "../data/foodData";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useDispatch,
+  // useSelector
+} from "react-redux";
 import { cartActions } from "../redux/cartSlice";
 
 interface propsType {
@@ -8,25 +11,25 @@ interface propsType {
   search: string;
 }
 
-interface stateType {
-  cartReducer: {
-    cart: {
-      id: number;
-      img: string;
-      name: string;
-      price: number;
-      desc: string;
-      category: string;
-      rating: number;
-    }[];
-  };
-}
+// interface stateType {
+//   cartReducer: {
+//     cart: {
+//       id: number;
+//       img: string;
+//       name: string;
+//       price: number;
+//       desc: string;
+//       category: string;
+//       rating: number;
+//     }[];
+//   };
+// }
 
 const FoodMenu: FC<propsType> = ({ choosed, search }) => {
-  const cart = useSelector((state: stateType) => state.cartReducer.cart);
+  // const cart = useSelector((state: stateType) => state.cartReducer.cart);
   const dispatch = useDispatch();
 
-  console.log(cart);
+  // console.log(cart);
 
   const typeChoosed =
     choosed === "All"
@@ -62,7 +65,10 @@ const FoodMenu: FC<propsType> = ({ choosed, search }) => {
                 <span>{food.rating}</span>
               </p>
               <button
-                onClick={() => dispatch(cartActions.add_item(food))}
+                onClick={() => {
+                  food.quantity = 1;
+                  dispatch(cartActions.add_item(food));
+                }}
                 className="cursor-pointer rounded-lg text-sm text-white bg-green-500 p-1 hover:bg-green-600"
               >
                 Add to cart

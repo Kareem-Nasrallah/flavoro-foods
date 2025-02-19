@@ -1,4 +1,5 @@
 interface singleFoodDataType {
+  quantity: number;
   id: number;
   img: string;
   name: string;
