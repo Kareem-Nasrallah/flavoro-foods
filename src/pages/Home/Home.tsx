@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MenuButton from "../../components/MenuButton";
 import FoodMenu from "../../components/FoodMenu";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -48,8 +49,14 @@ const Home = () => {
           (isOpen ? "right-5" : "-right-24")
         }
       >
-        <p className="cursor-pointer text-gray-600 hover:text-black">Login</p>
-        <p className="cursor-pointer text-gray-600 hover:text-black">Signup</p>
+        <Link to="/login">
+          <p className="cursor-pointer text-gray-600 hover:text-black">Login</p>
+        </Link>
+        <Link to="/signup">
+          <p className="cursor-pointer text-gray-600 hover:text-black">
+            Signup
+          </p>
+        </Link>
       </div>
       <h2 className="text-xl mt-13 mb-4 font-semibold">Find the best food</h2>
       <div className="my-5">

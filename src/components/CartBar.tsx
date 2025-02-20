@@ -29,7 +29,9 @@ const CartBar = () => {
       <div
         className={
           "px-1 flex flex-col items-center text-gray-800 py-5 z-20 bg-white fixed h-screen w-full top-0 transition-all duration-500 ease-in-out lg:w-[20vw] lg:min-w-80 lg:px-5 " +
-          (showCart ? "right-0" : "-right-full lg:-right-[20vw]")
+          (showCart
+            ? "right-0"
+            : "-right-full lg:-right-[32vw] xl:-right-[25vw] 2xl:-right-[22vw]")
         }
       >
         <div className="w-full flex flex-col items-center pt-3">
@@ -70,12 +72,26 @@ const CartBar = () => {
         </div>
       </div>
       {!showCart && (
-        <div
-          onClick={() => setShowCart(true)}
-          className="z-10 cursor-pointer shadow-lg w-12 h-12 rounded-full flex justify-center items-center fixed bottom-6 right-4 bg-white"
-        >
-          <i className="text-xl fa-solid fa-cart-shopping"></i>
-        </div>
+        <>
+          <div
+            onClick={() => setShowCart(true)}
+            className={
+              "z-10 cursor-pointer fixed bottom-6 right-4 " +
+              (cartItems.length > 0 ? "animate-bounce" : "")
+            }
+          >
+            {cartStore.amount != 0 && (
+              <div className="absolute -left-0 -top-1 px-1 py-0.5 min-w-5 bg-green-500 flex justify-center items-center rounded-full">
+                <span className="text-xs font-semibold">
+                  {cartStore.amount}
+                </span>
+              </div>
+            )}
+            <div className="shadow-lg  w-12 h-12 rounded-full flex bg-white justify-center gap-0.5 items-center ">
+            <i className="text-xl fa-solid fa-cart-shopping"></i>
+            </div>
+          </div>
+        </>
       )}
     </>
   );

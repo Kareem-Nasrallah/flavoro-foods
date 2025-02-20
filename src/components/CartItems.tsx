@@ -23,7 +23,7 @@ const CartItems = () => {
   );
 
   return (
-    <div className="mt-4 flex gap-4 flex-wrap justify-start items-start overflow-auto">
+    <div className="p-2 mt-4 flex gap-4 flex-wrap justify-start items-start overflow-auto lg:p-0 lg:pb-1">
       {allCartItems.map((food) => {
         return (
           <div
