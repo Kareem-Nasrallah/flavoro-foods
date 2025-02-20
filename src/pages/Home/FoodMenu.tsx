@@ -1,35 +1,22 @@
 import { FC } from "react";
-import foodData from "../data/foodData";
+import foodData from "../../data/foodData";
 import {
   useDispatch,
-  // useSelector
 } from "react-redux";
-import { cartActions } from "../redux/cartSlice";
+import { cartActions } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 interface propsType {
   choosed: string;
   search: string;
 }
 
-// interface stateType {
-//   cartReducer: {
-//     cart: {
-//       id: number;
-//       img: string;
-//       name: string;
-//       price: number;
-//       desc: string;
-//       category: string;
-//       rating: number;
-//     }[];
-//   };
-// }
-
 const FoodMenu: FC<propsType> = ({ choosed, search }) => {
-  // const cart = useSelector((state: stateType) => state.cartReducer.cart);
   const dispatch = useDispatch();
 
-  // console.log(cart);
+  const navigate = useNavigate();
+
+  const toDetails = (id: number) => navigate(`/${id}`);
 
   const typeChoosed =
     choosed === "All"
@@ -47,12 +34,13 @@ const FoodMenu: FC<propsType> = ({ choosed, search }) => {
       {searchFood.map((food) => {
         return (
           <div
+            onClick={() => toDetails(food.id)}
             key={food.id}
-            className="flex flex-col justify-between gap-2 bg-white p-5 w-[250px] rounded-lg"
+            className="cursor-pointer flex flex-col justify-between gap-2 bg-white p-5 w-[250px] rounded-lg group"
           >
             <img
               src={food.img}
-              className="h-[130px] rounded-lg transition-all duration-500 ease-in-out hover:scale-110"
+              className="h-[130px] rounded-lg transition-all duration-500 ease-in-out group-hover:scale-110"
             />
             <div className="font-semibold flex justify-between">
               <h3 className=" text-sm">{food.name}</h3>
@@ -65,8 +53,8 @@ const FoodMenu: FC<propsType> = ({ choosed, search }) => {
                 <span>{food.rating}</span>
               </p>
               <button
-                onClick={() => {
-                  food.quantity = 1;
+                onClick={(e) => {
+                  e.stopPropagation()
                   dispatch(cartActions.add_item(food));
                 }}
                 className="cursor-pointer rounded-lg text-sm text-white bg-green-500 p-1 hover:bg-green-600"

@@ -1,7 +1,9 @@
 import { useState } from "react";
-import MenuButton from "../../components/MenuButton";
-import FoodMenu from "../../components/FoodMenu";
-import { Link } from "react-router-dom";
+import MenuButton from "./MenuButton";
+import FoodMenu from "./FoodMenu";
+import { Link} from "react-router-dom";
+import NotRegistered from "../../components/NotRegistered";
+import CartBar from "../../components/CartBar";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -18,7 +20,9 @@ const Home = () => {
       year: "numeric",
     });
   return (
-    <>
+    <div className="py-3 px-6">
+      <NotRegistered />
+      <CartBar />
       <nav className="relative flex flex-col justify-between gap-5 mb-12 lg:flex-row">
         <div>
           <p className="text-xl font-semibold text-neutral-600">
@@ -73,7 +77,7 @@ const Home = () => {
       <div className="my-10">
         <FoodMenu choosed={choosed} search={search} />
       </div>
-    </>
+    </div>
   );
 };
 
