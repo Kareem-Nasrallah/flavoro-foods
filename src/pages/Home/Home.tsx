@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MenuButton from "./MenuButton";
 import FoodMenu from "./FoodMenu";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import NotRegistered from "../../components/NotRegistered";
 import CartBar from "../../components/CartBar";
 
