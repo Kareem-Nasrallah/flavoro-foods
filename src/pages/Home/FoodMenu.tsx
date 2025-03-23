@@ -1,8 +1,6 @@
 import { FC } from "react";
 import foodData from "../../data/foodData";
-import {
-  useDispatch,
-} from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -54,8 +52,8 @@ const FoodMenu: FC<propsType> = ({ choosed, search }) => {
               </p>
               <button
                 onClick={(e) => {
-                  e.stopPropagation()
-                  dispatch(cartActions.add_item(food));
+                  e.stopPropagation();
+                  dispatch(cartActions.add_item({ ...food, quantity: 1 }));
                 }}
                 className="cursor-pointer rounded-lg text-sm text-white bg-green-500 p-1 hover:bg-green-600"
               >
