@@ -1,0 +1,6 @@
+React 
+React Ruter Dom
+Ts
+Tw
+Redux Toolkit
+React Redux

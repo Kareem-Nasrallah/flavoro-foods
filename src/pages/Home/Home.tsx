@@ -2,7 +2,6 @@ import { useState } from "react";
 import MenuButton from "./MenuButton";
 import FoodMenu from "./FoodMenu";
 import { Link } from "react-router-dom";
-import NotRegistered from "../../components/NotRegistered";
 import CartBar from "../../components/CartBar";
 
 const Home = () => {
@@ -21,7 +20,6 @@ const Home = () => {
     });
   return (
     <div className="py-3 px-6">
-      <NotRegistered />
       <CartBar />
       <nav className="relative flex flex-col justify-between gap-5 mb-12 lg:flex-row">
         <div>
