@@ -2,7 +2,6 @@ import { useState } from "react";
 import MenuButton from "./MenuButton";
 import FoodMenu from "./FoodMenu";
 import { Link } from "react-router-dom";
-import CartBar from "../../components/CartBar";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -20,7 +19,6 @@ const Home = () => {
     });
   return (
     <div className="py-3 px-6">
-      <CartBar />
       <nav className="relative flex flex-col justify-between gap-5 mb-12 lg:flex-row">
         <div>
           <p className="text-xl font-semibold text-neutral-600">
